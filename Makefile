@@ -1,6 +1,9 @@
 DEV_FLASK_ENV=development
 DEV_DATABASE_URI=postgresql://myuser:mypassword@127.0.0.1:5432/mydatabase
 
+TEST_FLASK_ENV=testing
+TEST_DATABASE_URI=sqlite:///:memory:
+
 
 install:
 	python3 -m venv env
@@ -23,3 +26,9 @@ run_dev:
 	export DATABASE_URI=$(DEV_DATABASE_URI) && \
 	. env/bin/activate && \
 	python run.py
+
+run_tests:
+	export FLASK_ENV=$(TEST_FLASK_ENV) && \
+	export DATABASE_URI=$(TEST_DATABASE_URI) && \
+	. env/bin/activate && \
+	pytest --cov=app --cov-report=term-missing --cov-fail-under=80
