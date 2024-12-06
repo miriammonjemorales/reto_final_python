@@ -5,6 +5,7 @@
 1. Sistema Operativo Linux
 1. Docker
 1. Python3.10 o superior
+1. Make (Deberá instalarse a nivel de sistema)
 
 
 ## Instalación
