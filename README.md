@@ -49,6 +49,7 @@ make install_db
 Para ejecutar la aplicación debemos primero levantar la base de datos (previamente inicializada) y a continuación usaremos:
 
 ```bash
+# Si la base de datos no ha sido levantada aún
 docker compose up -d
 
 make run_dev
