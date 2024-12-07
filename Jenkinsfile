@@ -2,11 +2,11 @@ pipeline {
     agent none
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             agent { label 'agent-builder-python' }
             steps {
-                git branch: 'main', // Replace with your branch
-                    url: 'https://github.com/miriammonjemorales/reto_final_python.git' // Replace with your repo URL
+                echo 'Checking out the code'
+                checkout scm
             }
         }
         stage('Install') {
@@ -32,7 +32,7 @@ pipeline {
         stage('Clone Repository Docker Build') {
             agent { label 'agent-builder-docker' }
             steps {
-                git branch: 'main', // Replace with your branch
+                git branch: 'main',
                     url: 'https://github.com/miriammonjemorales/reto_final_python.git' // Replace with your repo URL
             }
         }
