@@ -57,7 +57,7 @@ pipeline {
             agent { label 'agent-builder-docker' }
             steps {
                 echo 'Removing the docker image'
-                sh 'docker compose down app --rmi all'
+                // sh 'docker compose down app --rmi all'
             }
         }
     }
