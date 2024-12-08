@@ -67,9 +67,9 @@ pipeline {
             node('agent-builder-python') {
                 cleanWs()
             }
-            node('agent-builder-docker') {
-                cleanWs()
-            }
+            //node('agent-builder-docker') {
+            //    cleanWs()
+            //}
         }
     }
 }
