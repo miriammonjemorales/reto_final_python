@@ -48,11 +48,22 @@ pipeline {
                 sh 'docker compose build app'
             }
         }
+
+        stage('Removing docker image') {
+            agent { label 'agent-builder-docker' }
+            steps {
+                echo 'Removing the docker image'
+                sh 'docker compose down app --rmi all'
+            }
+        }
     }
 
     post {
         always {
             node('agent-builder-python') {
+                cleanWs()
+            }
+            node('agent-builder-docker') {
                 cleanWs()
             }
         }
