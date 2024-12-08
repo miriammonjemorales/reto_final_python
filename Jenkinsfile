@@ -1,6 +1,10 @@
 pipeline {
     agent none
 
+    environment {
+        DOCKER_IMAGE = 'miriammonjem/app:latest'
+    }
+
     stages {
         stage('Checkout for tests') {
             agent { label 'agent-builder-python' }
