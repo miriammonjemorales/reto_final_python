@@ -38,7 +38,7 @@ make install_testing
 La base de datos se deberá inicializar para poder trabajar con ella en local. Para ello debemos levantarla con:
 
 ```bash
-docker compose up -d
+docker compose up db -d
 ```
 
 Una vez levantada debemos crear los compomentes básicos:
@@ -53,7 +53,7 @@ Para ejecutar la aplicación debemos primero levantar la base de datos (previame
 
 ```bash
 # Si la base de datos no ha sido levantada aún
-docker compose up -d
+docker compose up db -d
 
 make run_dev
 ```
