@@ -48,7 +48,7 @@ make install_db
 ```
 
 
-## Ejecución de aplicación
+## Ejecución de la aplicación
 Para ejecutar la aplicación debemos primero levantar la base de datos (previamente inicializada) y a continuación usaremos:
 
 ```bash
