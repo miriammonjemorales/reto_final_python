@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout for tests') {
+        stage('Checkout for Python') {
             agent { label 'agent-builder-python' }
             steps {
                 echo 'Checking out the code'
@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage('Install for tests') {
+        stage('Install for Python') {
             agent { label 'agent-builder-python' }
             steps {
                 sh 'make install'
@@ -23,21 +23,21 @@ pipeline {
             }
         }
 
-        stage('Testing') {
+        stage('Testing in Python') {
             agent { label 'agent-builder-python' }
             steps {
                 sh 'make run_tests'
             }
         }
 
-        stage('Linting') {
+        stage('Linting in Python') {
             agent { label 'agent-builder-python' }
             steps {
                 sh '. env/bin/activate; flake8 --exclude env'
             }
         }
 
-        stage('Checkout for docker image build') {
+        stage('Checkout for Docker') {
             agent { label 'agent-builder-docker' }
             steps {
                 echo 'Checking out the code'
@@ -45,7 +45,7 @@ pipeline {
             }
         }
 
-        stage('Build docker image') {
+        stage('Build image in Docker') {
             agent { label 'agent-builder-docker' }
             steps {
                 echo 'Building the docker image'
@@ -53,7 +53,7 @@ pipeline {
             }
         }
 
-        stage('Login and Push') {
+        stage('Docker Login and Push') {
             agent { label 'agent-builder-docker' }
             steps {
                 echo 'Login in and Pushing image'
@@ -72,11 +72,12 @@ pipeline {
             }
         }
 
-        stage('Removing docker image') {
+        stage('Docker rmi and Logout') {
             agent { label 'agent-builder-docker' }
             steps {
                 echo 'Removing the docker image'
                 sh 'docker compose down app --rmi all'
+                sh 'docker logout'
             }
         }
     }
