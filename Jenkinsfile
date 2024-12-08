@@ -53,11 +53,22 @@ pipeline {
             }
         }
 
+        stage('Login and Push') {
+            withCredentials([usernamePassword(credentialsId: 'docker-registry-creds', 
+                                              usernameVariable: 'DOCKER_USERNAME', 
+                                              passwordVariable: 'DOCKER_PASSWORD')]) {
+                sh """
+                echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
+                docker push ${DOCKER_IMAGE}
+                """
+            }
+        }
+
         stage('Removing docker image') {
             agent { label 'agent-builder-docker' }
             steps {
                 echo 'Removing the docker image'
-                // sh 'docker compose down app --rmi all'
+                sh 'docker compose down app --rmi all'
             }
         }
     }
@@ -67,9 +78,9 @@ pipeline {
             node('agent-builder-python') {
                 cleanWs()
             }
-            //node('agent-builder-docker') {
-            //    cleanWs()
-            //}
+            node('agent-builder-docker') {
+                cleanWs()
+            }
         }
     }
 }
