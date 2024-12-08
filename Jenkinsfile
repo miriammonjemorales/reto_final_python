@@ -45,7 +45,7 @@ pipeline {
             agent { label 'agent-builder-docker' }
             steps {
                 echo 'Building the docker image'
-                docker compose build app
+                sh 'docker compose build app'
             }
         }
     }
