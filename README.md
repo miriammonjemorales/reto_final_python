@@ -60,7 +60,7 @@ make run_dev
 
 
 ## Ejecución de tests
-Para ejecutar los tests debemos tener instalado el modo "testing". El siguiente comando ejecutará todos los tests
+Para ejecutar los tests debemos tener instalado el modo "testing". El siguiente comando ejecutará todos los tests.
 
 ```bash
 make run_tests
