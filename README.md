@@ -1,5 +1,7 @@
 # reto_final_python
 
+Este documento describe como prepara el entorno local para reto_final_python
+
 
 ## Pre-requisitos
 1. Sistema Operativo Linux
