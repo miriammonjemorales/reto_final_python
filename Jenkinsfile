@@ -57,17 +57,19 @@ pipeline {
             agent { label 'agent-builder-docker' }
             steps {
                 echo 'Login in and Pushing image'
-                sh 'docker compose build app'
-            }
-        
-                withCredentials([usernamePassword(credentialsId: 'docker-registry-creds', 
-                                                  usernameVariable: 'DOCKER_USERNAME', 
-                                                  passwordVariable: 'DOCKER_PASSWORD')]) {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'docker-registry-creds',
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )
+                ]) {
                     sh """
                     echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin
                     docker push ${DOCKER_IMAGE}
                     """
                 }
+            }
         }
 
         stage('Removing docker image') {
